@@ -1,0 +1,33 @@
+    @font-face{
+	font-family:'PressStart2P';
+	src: url('../font/PressStart2P.ttf')
+    }
+    
+       * {
+         margin: 0;
+         padding: 0;  
+       }
+
+       .mint-button{
+           cursor: pointer;
+           font-family:"PressStart2P" ;
+           font-style: normal;
+           min-width: 326px;
+           font-size: 34px;
+           font-weight: 700;
+           color: white;
+           -webkit-text-stroke-color: black;
+           -webkit-text-stroke-width: 0.1rem;
+           width: auto;
+           margin: 150px;
+          /* background:yellow;*/
+           border: 20px solid red;
+           border-image-source: url("../static/images/mint.png");
+           border-image-slice: 30;
+           border-image-width: 42px;
+            border-image-outset: 30px;
+           border-image-repeat: stretch;
+
+          
+
+       }
