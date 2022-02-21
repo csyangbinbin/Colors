@@ -6,7 +6,12 @@
       "target": "es5",
       "jsx": "react",
       "allowJs": true,
+      "esModuleInterop": true,
       "moduleResolution": "node",
       "sourceMap": true,
-    }
+      "allowSyntheticDefaultImports":true
+    } ,
+    "include": [
+      "src/js/*.ts"
+    ]
 }
