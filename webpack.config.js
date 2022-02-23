@@ -7,6 +7,7 @@ module.exports = {
     resolve: {
       extensions: ['.ts', '.js'],
     },
+
     output:{
       filename:'js/index.js?[hash]',
       path:path.resolve(__dirname , "dist") , 
@@ -14,13 +15,23 @@ module.exports = {
     },
     plugins:[  
         new HtmlWebpackPlugin({
-            template:path.resolve(__dirname ,"src/index.html")
+            template:path.resolve(__dirname ,"src/index.html") ,
+            filename:'index.html' ,
+            inject:'body'
         }) ,
     ] , 
     devtool: 'source-map', 
     devServer: {
-        static: './dist',
-      }, 
+      static: {
+        directory: path.join(__dirname, '/dist'),
+      },
+      compress: true,
+      port: 9000,
+      open: true,
+      hot: true,
+      watchFiles: ['src/**/*']    
+    },
+     
     /*
     optimization: {
         runtimeChunk: 'single',
