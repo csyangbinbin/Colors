@@ -1,5 +1,5 @@
 import "../css/canvas.css"
-
+import $ from 'jquery';
 import { Camera } from "./camera";
 import {Canvasse } from './canvasse' ;
 import {CameraEvents} from './cameraevents' ; 
@@ -22,6 +22,7 @@ let Btn_2 = document.getElementById("btn2");
 let viewer = document.getElementById('place-viewer');
 let camera = document.getElementById('place-camera');
 let container = document.getElementById('place-container');
+
 
 if (!container) { return; }
 if(!viewer) { return ;}
