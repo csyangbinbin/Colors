@@ -1,20 +1,35 @@
- class CameraClass{
+import $ from 'jquery' ;
+
+class CameraClass{
      zoomElement:HTMLElement = null ; 
      panElement:HTMLElement  = null ;
+     isDirty:boolean =false ; 
     
      init(zoomElement:HTMLElement  ,panElement:HTMLElement ):void {
         this.zoomElement = zoomElement ; 
         this.panElement = panElement ; 
     }
+    tick() {
+        if (this.isDirty) {
+          this.isDirty = false;
+          return true;
+        }
+        return false;
+      }
 
      updateScale(s:number):void{
-        this.zoomElement.style.transform =  'scale(' + s + ',' + s + ')' ; 
+         this.isDirty = true;
+      $(this.zoomElement).css({
+        transform: 'scale(' + s + ',' + s + ')',
+      });
     }
 
+
      updateTranslate(x:number,y:number):void{
-        console.log(`updateTranslate=${x} ${y}`)
-        this.panElement.style.transform = 'translate(' + x + 'px,' + y + 'px)' ; 
-        console.log(`${ this.panElement.style.translate}`);
+        this.isDirty = true;
+        $(this.panElement).css({
+          transform: 'translate(' + x + 'px,' + y + 'px)',
+        });
     }
 }
 

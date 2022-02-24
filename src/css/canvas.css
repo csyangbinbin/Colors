@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+.place-uninitialized {
+   display: none;
+}
 
 .place {
     user-select: none;
@@ -41,6 +44,61 @@
 }
 .place-camera:active{
     cursor: -webkit-grab;
+}
+
+
+.place-bottom-toolbar {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.place-palette {
+    background: #111111;
+    box-sizing: border-box;
+    cursor: pointer;
+    left: 0;
+    padding: 5px;
+    text-align: center;
+    width: 100%;
+}
+
+.place-palette > * {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 30px;
+    vertical-align: top;
+    width: 30px;
+}
+
+.place-swatch.place-selected {
+         transform-origin: center;
+        transform: scale(1.1, 1.1);
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, .4);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.place-molly-guard {
+    background-color: rgba(0, 0, 0, .6);
+    background-image: url('../static/images/place_icon_unlocked.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 41px;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: all .3s;
+    width: 100%;
+
+}
+
+.place-molly-guard.place-locked{
+   background-image: url('../static/images/place_icon_locked.png');
+   opacity: 1;
 }
 
 
@@ -88,7 +146,7 @@
     width: 40px;  
     position: absolute;
     top: 10px;
-    right: 1120px;
+    right: 20px;
   
 }
 
@@ -122,7 +180,27 @@
     opacity: 0;
    
   }
+  .place-zoom-pulse.place-zoom-pulsing {
+   -webkit-animation: pulse 3s ease-out;
+   -moz-animation: pulse 3s ease-out;
+   animation: pulse 3s ease-out;
+   -webkit-animation-iteration-count: 10;
+   -moz-animation-iteration-count: 10;
+   animation-iteration-count: 10;
+ }
+
+
+.place-camera-button {
+   display: none;
+   top: 60px;
+   right: 10px;
+   background-image: url('../static/images/place_camera_track_on.png');
+}
+.place-camera-button.place-following {
+   background-image:url('../static/images/place_camera_track_off.png');
+}
   
+ 
   
   @-moz-keyframes pulse {
    0% {

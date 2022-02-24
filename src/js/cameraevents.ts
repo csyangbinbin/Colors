@@ -1,4 +1,5 @@
 import { Client } from './client' ; 
+import { Cursor  } from './cursor' ; 
 
  function getCoordsFromEvent(e:MouseEvent) {
     return { 
@@ -10,40 +11,21 @@ function dumpCoord(msg:string,val:{x:number,y:number}){
     console.log(`${msg} x=${val.x} y=${val.y}`);
 }
 
-let Cursor = {
-       x:0,
-       y:0,
-       downX:0,
-       downY:0 ,
-       isDown:false
-}
-
+const E_KEY = 69 ;
 
 let CameraEvents = {
-   
-
 
     'container':{
         'mousedown':function(e:MouseEvent){
             let coords = getCoordsFromEvent(e) ; 
-            dumpCoord('container-mousedown' , coords);
-            Cursor.downX  = coords.x ; 
-            Cursor.downY = coords.y;
-            Cursor.x = coords.x ; 
-            Cursor.y = coords.y ; 
-            Cursor.isDown = true ; 
-            
+            Cursor.setCursorDown(coords.x, coords.y);   
         } ,
         'mouseup':function(e:MouseEvent){
             let coords = getCoordsFromEvent(e) ; 
-            dumpCoord('container-mouseup' , coords);
-            Cursor.isDown = false ; 
+            Cursor.setCursorUp(coords.x, coords.y);
         } ,
         'mousemove':function(e:MouseEvent){
-
-            if(!Cursor.isDown) 
-                return ; 
-
+            
             let coords = getCoordsFromEvent(e) ; 
             var offsetLeft = e.currentTarget ? (e.currentTarget as HTMLElement) .offsetLeft : 0;
             var offsetTop = e.currentTarget ? (e.currentTarget as HTMLElement).offsetTop : 0;
@@ -54,24 +36,28 @@ let CameraEvents = {
               );
 
             var activeTileCoords = Client.getCursorPositionFromLocation(tileCoords.x, tileCoords.y);
+            Cursor.setActiveTilePosition(
+                activeTileCoords.x + offsetLeft,
+                activeTileCoords.y + offsetTop
+              );
 
-           // dumpCoord('container-mousemove' , coords);
-           // console.log(`tileCoords=${tileCoords.x} , ${tileCoords.y}`);
-           // console.log(`activeTileCoords=${activeTileCoords.x} , ${activeTileCoords.y}`);
+            if (!Cursor.isDown) {
+                Cursor.setTargetPosition(coords.x, coords.y);
+                return;
+              }  
+          
+              Client.interact();
 
             let oldOffsetX = (Cursor.x - Cursor.downX) /Client.zoom; 
             let oldOffsetY = (Cursor.y - Cursor.downY) /Client.zoom; 
 
-                Cursor.x = coords.x ;
-                Cursor.y = coords.y ; 
+            // Then update the cursor position so we can do the same on
+            // the next mousemove event
+             Cursor.setPosition(coords.x, coords.y);
 
 
             let newOffsetX = (coords.x -Cursor.downX)/Client.zoom ; 
             let newOffsetY  = (coords.y - Cursor.downY)/Client.zoom ; 
-
-
-console.log(` oldOffsetX=${oldOffsetX} , oldOffsetY=${oldOffsetY}`);
-console.log(`- newOffsetX=${newOffsetX} , newOffsetY=${newOffsetY}`);
 
               // And update the offset.  Important to know that Client
         // expects offset coordinates in canvas-space, which is why
@@ -81,12 +67,16 @@ console.log(`- newOffsetX=${newOffsetX} , newOffsetY=${newOffsetY}`);
             Client.panX - oldOffsetX + newOffsetX,
             Client.panY - oldOffsetY + newOffsetY
           );
-
-           // 
-           // console.log(`offsetLeft]${offsetLeft} ,offsetTop=${offsetTop}`);
         }
-    }
+    } ,
     
+    'document': {
+      'keydown': function(e:KeyboardEvent) {
+        if (e.which === E_KEY) {
+          Client.toggleZoom();
+        }
+      }
+    } ,
 
 } ; 
 
