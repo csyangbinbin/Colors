@@ -14,6 +14,7 @@ import { ZoomButtonEvents } from "./zoombuttonevents";
 import {Cursor} from './cursor' ; 
 import {CanvasEvents} from './canvasevents' ;
 import { Coordinates } from "./coordinates";
+import { Keyboard } from "./keyboard";
 
 import * as utils from './utils' ;
 
@@ -103,6 +104,7 @@ CameraButton.enable();
 Hand.init(hand, handSwatch, handCursor);
 Palette.init(palette);
 ZoomButton.init(zoomButton);
+Keyboard.init();
 
 
     // Clamp starting coordinates to the canvas boundries
@@ -151,7 +153,7 @@ utils.bindEvents(camera, CanvasEvents);
 
 
 startTicking(function() {
- // Keyboard.tick();
+  Keyboard.tick();
   Client.tick();
   Cursor.tick();
   var cameraDidUpdate = Camera.tick();
@@ -176,7 +178,6 @@ var loadingTicks = 0;
 var loadingTicksPerFrame = 10;
 
 var loadingAnimationCancel = startTicking(function() {
-    console.log(`loadingAnimation=${loadingTicks} ${minLoadingX} ${loadingY}`);
   loadingTicks = (loadingTicks + 1) % loadingTicksPerFrame;
   // only show when ticks is 0
   if (loadingTicks) { return; }
@@ -186,7 +187,9 @@ var loadingAnimationCancel = startTicking(function() {
   loadingX = (loadingX + loadingDir) % loadingWidth;
   // draw new tile
   Canvasse.drawTileToDisplay(minLoadingX + loadingX, loadingY, 'black');
-});*/
+});
+
+*/
 
 
 
@@ -204,7 +207,7 @@ var loadingAnimationCancel = startTicking(function() {
 
 
 
-
+/*
 
 Btn_1.addEventListener("click" ,click_1);
 Btn_2.addEventListener("click" ,click_2);
@@ -225,7 +228,7 @@ for(let i=0;i<=canvasWidth;i+=10){
     ctx.lineTo(i,canvasHeight);
     ctx.stroke() ;
 }
-
+*/
 
 
 

@@ -6,6 +6,7 @@ import {CameraButton} from './camerabutton' ;
 import { ZoomButton } from './zoombutton'; 
 import {MollyGuard} from './mollyguard' ;
 import { Coordinates } from './coordinates';
+import { Keyboard } from './keyboard';
 import {parseHexColor ,lerp ,normalizeVector} from './utils' ;
 
 interface BoxSize{
@@ -74,7 +75,7 @@ class ClientClass{
   MAXIMUM_AUDIBLE_DISTANCE=   10;
   WORLD_AUDIO_MULTIPLIER=  .1;
   MAX_WORLD_AUDIO_RATE=  250;
-  KEYBOARD_PAN_SPEED=  .5;
+  KEYBOARD_PAN_SPEED=  .35;
   KEYBOARD_PAN_LERP_SPEED=  .275;
 
   DEFAULT_COLOR_PALETTE =  [
@@ -186,7 +187,7 @@ class ClientClass{
 
     this.currentDirection.x = 0;
     this.currentDirection.y = 0;
-/*
+
     if (Keyboard.isKeyDown('LEFT') || Keyboard.isKeyDown('A')) {
       this.currentDirection.x -= 1;
     }
@@ -199,7 +200,7 @@ class ClientClass{
     if (Keyboard.isKeyDown('DOWN') || Keyboard.isKeyDown('S')) {
       this.currentDirection.y += 1;
     }
-*/
+
     normalizeVector(this.currentDirection);
 
     if (this._currentDirection.x !== this.currentDirection.x) {
