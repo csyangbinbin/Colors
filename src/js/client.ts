@@ -5,6 +5,7 @@ import {Palette} from './palette' ;
 import {CameraButton} from './camerabutton' ;
 import { ZoomButton } from './zoombutton'; 
 import {MollyGuard} from './mollyguard' ;
+import { Coordinates } from './coordinates';
 import {parseHexColor ,lerp ,normalizeVector} from './utils' ;
 
 interface BoxSize{
@@ -229,7 +230,7 @@ class ClientClass{
 
     if (didOffsetUpdate) {
       Camera.updateTranslate(this._panX, this._panY);
-     // var coords = this.getCameraLocationFromOffset(this._panX, this._panY);
+     // let coords = this.getCameraLocationFromOffset(this._panX, this._panY);
      // Coordinates.setCoordinates(Math.round(coords.x), Math.round(coords.y));
     }
 
@@ -459,8 +460,9 @@ class ClientClass{
         this._panX = this.panX = x;
         this._panY = this.panY = y;
         Camera.updateTranslate(this._panX, this._panY);
-        //var coords = this.getCameraLocationFromOffset(this._panX, this._panY);
+        //let coords = this.getCameraLocationFromOffset(this._panX, this._panY);
         //Coordinates.setCoordinates(Math.round(coords.x), Math.round(coords.y));
+        
       }
 
 

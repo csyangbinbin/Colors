@@ -13,6 +13,7 @@ import {CameraButton} from './camerabutton' ;
 import { ZoomButtonEvents } from "./zoombuttonevents";
 import {Cursor} from './cursor' ; 
 import {CanvasEvents} from './canvasevents' ;
+import { Coordinates } from "./coordinates";
 
 import * as utils from './utils' ;
 
@@ -75,6 +76,7 @@ let palette = document.getElementById('place-palette');
 let mollyGuard = document.getElementById('place-molly-guard');
 let zoomButton = document.getElementById('place-zoom-button');
 let cameraButton = document.getElementById('place-camera-button');
+let coordinates = document.getElementById('place-coordinates');
 
 let isUserLoggedIn = false ; 
 let cooldownDuration=1000 ; 
@@ -114,12 +116,14 @@ ZoomButton.init(zoomButton);
     var startX = Math.max(0, Math.min(canvasWidth,  randomX));
     var startY = Math.max(0, Math.min(canvasHeight,  randomY));
   
+    Coordinates.init(coordinates, startX, startY);
 
-    console.log(`startX=${startX} , startY=${startY}`);
+
+    //console.log(`startX=${startX} , startY=${startY}`);
     // Convert those values to canvas transform offsets
     // TODO - this shouldn't be done here, it requires Canvasse.init to be called first
     var startOffsets = Client.getOffsetFromCameraLocation(startX, startY);
-    console.log(`startOffsets=${startOffsets.x } _ ${startOffsets.y} `);
+    //console.log(`startOffsets=${startOffsets.x } _ ${startOffsets.y} `);
 
 
     Client.init(isUserLoggedIn, cooldownDuration, startOffsets.x, startOffsets.y);

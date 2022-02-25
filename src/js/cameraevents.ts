@@ -1,4 +1,5 @@
 import { Client } from './client' ; 
+import { Coordinates } from './coordinates';
 import { Cursor  } from './cursor' ; 
 
  function getCoordsFromEvent(e:MouseEvent) {
@@ -34,6 +35,8 @@ let CameraEvents = {
                 coords.x - offsetLeft,
                 coords.y - offsetTop
               );
+              console.log(`tileCoords=${tileCoords.x} ${tileCoords.y}`) ;
+              Coordinates.setCoordinates(tileCoords.x ,tileCoords.y)  ;
 
             var activeTileCoords = Client.getCursorPositionFromLocation(tileCoords.x, tileCoords.y);
             Cursor.setActiveTilePosition(
