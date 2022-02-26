@@ -738,9 +738,9 @@ class ClientClass{
 
       /*
       if (!this.paletteColor || !this.enabled) {
-        AudioManager.playClip(SFX_ERROR);
+       // AudioManager.playClip(SFX_ERROR);
         return;
-      }*/
+     }*/
 
       // Disable to prevent further draw actions until the API request resolves.
       this.disable();
